@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/appIcon.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/background_gradiant.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/background_gradiant_rounded.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/background_icon.xml" value="0.148" />
+        <entry key="app/src/main/res/drawable/background_image.xml" value="0.21302083333333333" />
+        <entry key="app/src/main/res/drawable/background_input.xml" value="0.21302083333333333" />
+        <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.125" />
+        <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.148" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21302083333333333" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/ic_round_menu_24.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/iconapp.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/layout_bg_rounded.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/menu.xml" value="0.17" />
+        <entry key="app/src/main/res/drawable/menu_icon.xml" value="0.148" />
+        <entry key="app/src/main/res/drawable/nav_bar_gradiant.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/progress_bar.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_account.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_signin.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.196875" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1078125" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1078125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

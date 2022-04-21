@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "747688096353",
+    "project_id": "textify-7737c",
+    "storage_bucket": "textify-7737c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747688096353:android:dc4e5496f8cc2564903020",
+        "android_client_info": {
+          "package_name": "com.mounirgaiby.textify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747688096353-auiiauqt7oastsi1vd6bj0mfp361uhvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXu8dV9M2Ou5gUa7c54etzinz_6Zysyo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747688096353-auiiauqt7oastsi1vd6bj0mfp361uhvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

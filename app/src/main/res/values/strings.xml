@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">TEXTIFY</string>
+    <string name="bonjour">Bonjour à Textify!</string>
+    <string name="connecter">Connectez-vous pour continuer</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de pass</string>
+    <string name="connecterbtn">Se Connecter</string>
+    <string name="register">S\'inscrire</string>
+    <string name="cr_er_un_compte">créer un compte</string>
+    <string name="addImage">Ajouter une image</string>
+    <string name="nom">Nom</string>
+    <string name="confirmpass">Confirmer le mot de pass</string>
+    <string name="registerbtn">S\'inscrire</string>
+    <string name="txtconnecter">Connecter</string>
+    <string name="val_name_empty">Entrez votre nom</string>
+    <string name="val_email_empty">Entrez votre email</string>
+    <string name="val_email_pattern">Entrez une adresse e-mail valide</string>
+    <string name="val_pass_empty">Entrez un mot de pass</string>
+    <string name="val_cpass_empty">Confirmez votre mot de pass</string>
+    <string name="val_unmatching_pass">Le mot de passe que vous avez entré ne correspond pas</string>
+    <string name="val_image">Veuillez sélectionner une image</string>
+    <string name="val_pass_length">Le mot de pass doit etre superieur a 6</string>
+    <string name="txt_reset_pass">Réinitialiser le mot de passe</string>
+    <string name="val_email_already_used">Adresse e-Mail déjà utilisée</string>
+    <string name="Account_Setting">PARAMETRE DE COMPTE</string>
+    <string name="Disconnected">Déconnecté</string>
+    <string name="unable_disconnect">Impossible de se déconnecter</string>
+</resources>
