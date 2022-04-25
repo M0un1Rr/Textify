@@ -78,7 +78,6 @@ private PreferenceManager preferenceManager;
                                     DocumentSnapshot ds = task1.getResult().getDocuments().get(0);
                                     preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
                                     preferenceManager.putString(Constants.User_UID,user.getUid());
-                                    preferenceManager.putString(Constants.KEY_USER_DID,ds.getId());
                                     preferenceManager.putString(Constants.KEY_NAME,ds.getString(Constants.KEY_NAME));
                                     preferenceManager.putString(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
                                     preferenceManager.putString(Constants.KEY_IMAGE,ds.getString(Constants.KEY_IMAGE));

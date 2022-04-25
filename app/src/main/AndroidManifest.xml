@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Textify">
         <activity
+            android:name=".activities.UsersActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.AccountActivity"
             android:exported="false" />
         <activity

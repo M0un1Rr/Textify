@@ -87,13 +87,14 @@ public class SignupActivity extends AppCompatActivity {
                             user.put(Constants.KEY_EMAIL,binding.inputEmail.getText().toString().toLowerCase());
                             user.put(Constants.KEY_IMAGE,encodedImage);
                             db.collection(Constants.KEY_COLLECTION_USERS)
-                                    .add(user)
+                                    .document(FBuser.getUid())
+                                    .set(user)
+
                                     .addOnSuccessListener(documentReference -> {
                                         loading(false);
 
                                         preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
                                         preferenceManager.putString(Constants.User_UID,FBuser.getUid());
-                                        preferenceManager.putString(Constants.KEY_USER_DID,documentReference.getId());
                                         preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString().toUpperCase());
                                         preferenceManager.putString(Constants.KEY_EMAIL,binding.inputEmail.getText().toString().toLowerCase());
                                         preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);

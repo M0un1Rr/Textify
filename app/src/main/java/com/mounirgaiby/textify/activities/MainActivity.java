@@ -42,6 +42,10 @@ private FirebaseAuth auth;
             Intent intent = new Intent(getApplicationContext(),AccountActivity.class);
             startActivity(intent);
         });
+        binding.fabNewChat.setOnClickListener(v->{
+            Intent intent = new Intent(getApplicationContext(),UsersActivity.class);
+            startActivity(intent);
+        });
 
 
     }
@@ -58,15 +62,14 @@ private FirebaseAuth auth;
 
     public void updateToken(String token){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection(Constants.KEY_COLLECTION_USERS)
-                .document(preferenceManager.getString(Constants.KEY_USER_DID))
+                .document(user.getUid())
         .update(Constants.KEY_FCM_TOKEN,token)
         .addOnSuccessListener(unused -> {
-                showToast("Mis a jour de Token a reussie");
-
         })
         .addOnFailureListener(e -> {
-            showToast("echec");
+            showToast("Echec de la mis a jour de Token");
         });
 
     }

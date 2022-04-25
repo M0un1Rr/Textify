@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TEXTIFY</string>
+    <string name="app_name">Textify</string>
     <string name="bonjour">Bonjour à Textify!</string>
     <string name="connecter">Connectez-vous pour continuer</string>
     <string name="email">Email</string>
@@ -25,4 +25,5 @@
     <string name="Account_Setting">PARAMETRE DE COMPTE</string>
     <string name="Disconnected">Déconnecté</string>
     <string name="unable_disconnect">Impossible de se déconnecter</string>
+    <string name="appnamel">TEXTIFY</string>
 </resources>
