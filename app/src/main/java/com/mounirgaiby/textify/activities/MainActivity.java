@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.mounirgaiby.textify.databases.DatabaseHelper;
 import com.mounirgaiby.textify.databinding.ActivityMainBinding;
 import com.mounirgaiby.textify.utilities.Constants;
 import com.mounirgaiby.textify.utilities.PreferenceManager;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 private ActivityMainBinding binding;
 private PreferenceManager preferenceManager;
 private FirebaseAuth auth;
+private DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +34,11 @@ private FirebaseAuth auth;
         setContentView(binding.getRoot());
         auth = FirebaseAuth.getInstance();
         preferenceManager = new PreferenceManager(getApplicationContext());
+        db = new DatabaseHelper(this);
         fillInfo();
         getToken();
         setListeners();
+        settingsCheck();
     }
 
     private void setListeners() {
@@ -71,6 +75,11 @@ private FirebaseAuth auth;
         .addOnFailureListener(e -> {
             showToast("Echec de la mis a jour de Token");
         });
+
+    }
+    public void settingsCheck(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.insertDataSettings(user.getUid(),1);
 
     }
 

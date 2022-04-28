@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.mounirgaiby.textify.adapters.UsersAdapter;
+import com.mounirgaiby.textify.listeners.UserListener;
 import com.mounirgaiby.textify.models.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.service.autofill.AutofillService;
 import android.view.View;
@@ -20,7 +22,7 @@ import com.mounirgaiby.textify.utilities.PreferenceManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersActivity extends AppCompatActivity {
+public class UsersActivity extends AppCompatActivity implements UserListener {
 private ActivityUsersBinding binding;
 private PreferenceManager preferenceManager;
     @Override
@@ -58,10 +60,11 @@ private PreferenceManager preferenceManager;
                            user.email = queryDocumentSnapshot.getString(Constants.KEY_EMAIL);
                            user.image = queryDocumentSnapshot.getString(Constants.KEY_IMAGE);
                            user.token = queryDocumentSnapshot.getString(Constants.KEY_FCM_TOKEN);
+                           user.id = queryDocumentSnapshot.getId();
                            users.add(user);
                        }
                        if(users.size()>0){
-                           UsersAdapter usersAdapter = new UsersAdapter(users);
+                           UsersAdapter usersAdapter = new UsersAdapter(users,this);
                            binding.usersRecyclerView.setAdapter(usersAdapter);
                            binding.usersRecyclerView.setVisibility(View.VISIBLE);
                        }else{
@@ -87,5 +90,13 @@ private PreferenceManager preferenceManager;
             binding.progressBar.setVisibility(View.INVISIBLE);
         }
 
+    }
+
+    @Override
+    public void onUserClicked(user user) {
+        Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+        intent.putExtra(Constants.KEY_USER,user);
+        startActivity(intent);
+        finish();
     }
 }

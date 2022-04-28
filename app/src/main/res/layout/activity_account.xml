@@ -115,8 +115,105 @@
 
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@id/main_layout"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="status de connection"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+            <TextView
+                android:id="@+id/textConStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="placeholder"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/secondary_text"
+                android:layout_marginLeft="@dimen/_5sdp"/>
+        </LinearLayout>
+        <Spinner
+
+            android:id="@+id/spinnerVisibility"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="à propos"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rien"
+
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/secondary_text"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mes contacts"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/secondary_text"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tous le monde"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/secondary_text"/>
+
+        </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="placeholder"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="placeholder"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="placeholder"/></LinearLayout>
+
+
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_8sdp"

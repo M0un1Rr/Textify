@@ -26,4 +26,10 @@
     <string name="Disconnected">Déconnecté</string>
     <string name="unable_disconnect">Impossible de se déconnecter</string>
     <string name="appnamel">TEXTIFY</string>
+    <string name="menu_chat_view_user">Afficher l\'utilisateur</string>
+    <string name="write_message">Ecrire une message</string>
+    <string-array name="status">
+        <item>En ligne</item>
+        <item>Hors ligne</item>
+    </string-array>
 </resources>

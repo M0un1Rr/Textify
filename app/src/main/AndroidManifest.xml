@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Textify">
         <activity
+            android:name=".activities.ChatActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".activities.UsersActivity"
             android:exported="false" />
         <activity
