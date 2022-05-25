@@ -18,9 +18,12 @@ import android.view.View;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -50,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     private PreferenceManager preferenceManager;
     private FirebaseFirestore db;
     private FirebaseUser user;
+    private String ConvoId;
 
 
     @Override
@@ -66,9 +70,7 @@ public class ChatActivity extends AppCompatActivity {
     }
     private void setListeners(){
         binding.imageBack.setOnClickListener(v->onBackPressed());
-        binding.sendBtn.setOnClickListener(v-> sendMessage());
-
-
+       binding.sendBtn.setOnClickListener(v -> sendMessage());
     }
     private void init(){
         db = FirebaseFirestore.getInstance();
@@ -85,16 +87,29 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void sendMessage(){
-        HashMap<String,Object> sender = new HashMap<>();
+        if(binding.chatMessage.getText().length()>0) {
+            HashMap<String,Object> sender = new HashMap<>();
         sender.put(Constants.KEY_EMAIL,receiverUser.id);
         HashMap<String,Object> message = new HashMap<>();
         message.put(Constants.KEY_SENDER_ID,user.getUid());
         message.put(Constants.KEY_RECEIVER_ID,receiverUser.id);
         message.put(Constants.KEY_MESSAGE,binding.chatMessage.getText().toString());
         message.put(Constants.KEY_TIMESTAMP,new Date());
-        db.collection(Constants.KEY_COLLECTION_CHAT)
-                .document(user.getUid()).set(sender);
         db.collection(Constants.KEY_COLLECTION_CHAT).add(message);
+        if(ConvoId != null){
+            updateConversion(binding.chatMessage.getText().toString());
+        }else{
+            HashMap<String,Object> conversion = new HashMap<>();
+            conversion.put(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.User_UID));
+            conversion.put(Constants.KEY_SENDER_NAME,preferenceManager.getString(Constants.KEY_NAME));
+            conversion.put(Constants.KEY_SENDER_IMAGE,preferenceManager.getString(Constants.KEY_IMAGE));
+            conversion.put(Constants.KEY_RECEIVER_ID,receiverUser.id);
+            conversion.put(Constants.KEY_RECEIVER_NAME,receiverUser.name);
+            conversion.put(Constants.KEY_RECEIVER_IMAGE,receiverUser.image);
+            conversion.put(Constants.KEY_LAST_MESSAGE,binding.chatMessage.getText().toString());
+            conversion.put(Constants.KEY_TIMESTAMP,new Date());
+            addConversion(conversion);
+        }}
         binding.chatMessage.setText(null);
 
 
@@ -142,7 +157,13 @@ public class ChatActivity extends AppCompatActivity {
 
           }
           binding.chatRV.setVisibility(View.VISIBLE);
+
       }
+        binding.progressBar.setVisibility(View.GONE);
+        if(ConvoId == null){
+            checkForConversion();
+        }
+
 
     };
 
@@ -164,9 +185,14 @@ public class ChatActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.item1:
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("nom", receiverUser.name);
+                hashMap.put("email", receiverUser.email);
+                hashMap.put("image", receiverUser.image);
+                hashMap.put("id",receiverUser.id);
+                Intent intent = new Intent(getApplicationContext(),OtherUserActivity.class);
+                intent.putExtra(Constants.KEY_USER,hashMap);
                 startActivity(intent);
-                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -185,4 +211,46 @@ public class ChatActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
     }
 
+    private void addConversion(HashMap<String,Object> conversion){
+        db.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+                .add(conversion)
+                .addOnSuccessListener(documentReference -> ConvoId = documentReference.getId());
+
+    }
+
+    private void updateConversion(String message){
+        DocumentReference documentReference =
+                db.collection(Constants.KEY_COLLECTION_CONVERSATIONS).document(ConvoId);
+        documentReference.update(
+          Constants.KEY_LAST_MESSAGE,message,
+          Constants.KEY_TIMESTAMP,new Date()
+        );
+
+    }
+
+    private void checkForConversion(){
+        if(chatMessages.size()!=0){
+            checkForConversionRemotly(preferenceManager.getString(Constants.User_UID)
+            ,receiverUser.id);
+            checkForConversionRemotly(receiverUser.id,preferenceManager.getString(Constants.User_UID));
+        }
+
+
+
+    }
+
+    private void checkForConversionRemotly(String senderId,String receiverId){
+        db.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+                .whereEqualTo(Constants.KEY_SENDER_ID,senderId)
+                .whereEqualTo(Constants.KEY_RECEIVER_ID,receiverId)
+                .get()
+                .addOnCompleteListener(conversationOnCompleteListener);
+    }
+
+    public final OnCompleteListener<QuerySnapshot> conversationOnCompleteListener = task ->{
+        if(task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size()>0){
+            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+            ConvoId = documentSnapshot.getId();
+        }
+    };
 }

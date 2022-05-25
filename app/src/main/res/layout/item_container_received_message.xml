@@ -29,11 +29,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/chatTime"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/secondary_text"
         android:textSize="@dimen/_10ssp"
-        app:layout_constraintEnd_toEndOf="@+id/chatContainer"
+        android:text="sssssssssssss"
+
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chatContainer"
         android:layout_marginEnd="@dimen/_2sdp"
         />

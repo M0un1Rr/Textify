@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_borde.xml" value="0.2075" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_content_bottom.xml" value="0.1" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_div.xml" value="0.2075" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_gradiant.xml" value="0.1" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_gradiant_rounded.xml" value="0.1" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_icon.xml" value="0.1" />
@@ -12,21 +14,27 @@
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_received_message.xml" value="0.1945" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_rounded_corner.xml" value="0.1945" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_sent_message.xml" value="0.1945" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/background_user.xml" value="0.1735" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/backgroundapropos.xml" value="0.2075" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/chat_input.xml" value="0.1945" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/ic_add.xml" value="0.1945" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/ic_back.xml" value="0.1945" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/ic_edit.xml" value="0.2075" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1945" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/ic_round_send_24.xml" value="0.1945" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/logo.xml" value="0.1945" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/rounded_back_button_chat.xml" value="0.1945" />
-        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_account.xml" value="0.25" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/seperator.xml" value="0.1735" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_account.xml" value="0.22" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_chat.xml" value="0.25" />
-        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_other_user.xml" value="0.33" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_signin.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_signup.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_users.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/background_sent_message.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/item_container_received_message.xml" value="0.5" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/item_container_recent_converation.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/item_container_sent_message.xml" value="0.33" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/item_container_user.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/menu/chat_menu.xml" value="0.2" />

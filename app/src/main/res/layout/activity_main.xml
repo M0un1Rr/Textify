@@ -34,6 +34,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_1sdp"
                 android:background="@drawable/logo"
+                android:backgroundTint="@color/logo"
                 style="@style/Logo_color"/>
 
             <TextView
@@ -73,9 +74,18 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:orientation="vertical"
+            android:overScrollMode="never"
             android:padding="@dimen/_20sdp"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:indeterminateTint="@color/primary"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabNewChat"

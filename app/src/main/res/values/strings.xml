@@ -28,6 +28,8 @@
     <string name="appnamel">TEXTIFY</string>
     <string name="menu_chat_view_user">Afficher l\'utilisateur</string>
     <string name="write_message">Ecrire une message</string>
+    <string name="a_propos">A propos</string>
+    <string name="deconnecter">Deconnecter</string>
     <string-array name="status">
         <item>En ligne</item>
         <item>Hors ligne</item>
