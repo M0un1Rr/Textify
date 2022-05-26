@@ -32,8 +32,6 @@
                 android:id="@+id/imageBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_back_button_chat"
-                android:backgroundTint="@color/white"
                 android:gravity="center"
                 android:padding="@dimen/_2sdp">
 
@@ -42,16 +40,16 @@
                     android:layout_width="@dimen/_29sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:src="@drawable/ic_back"
-                    android:tint="@color/black" />
+                    android:tint="@color/white" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/imageProfile"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:background="@drawable/background_image"
+                    android:backgroundTint="@color/white"
+                    android:padding="@dimen/_1sdp"
                     android:scaleType="centerCrop"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:riv_oval="true" />
             </LinearLayout>
 

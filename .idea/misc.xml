@@ -27,10 +27,11 @@
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/drawable/seperator.xml" value="0.1735" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_account.xml" value="0.22" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_chat.xml" value="0.25" />
-        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_other_user.xml" value="0.33" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_signin.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_signup.xml" value="0.2" />
+        <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/activity_users.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/background_sent_message.xml" value="0.2" />
         <entry key="..\:/Users/mouni/AndroidStudioProjects/Textify/app/src/main/res/layout/item_container_received_message.xml" value="0.5" />

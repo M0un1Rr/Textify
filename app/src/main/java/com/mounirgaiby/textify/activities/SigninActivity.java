@@ -4,28 +4,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
+
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.mounirgaiby.textify.R;
 import com.mounirgaiby.textify.databinding.ActivitySigninBinding;
 import com.mounirgaiby.textify.utilities.Constants;
 import com.mounirgaiby.textify.utilities.PreferenceManager;
 
-import java.util.HashMap;
 
 public class SigninActivity extends AppCompatActivity {
 private ActivitySigninBinding binding;
@@ -39,9 +35,11 @@ private PreferenceManager preferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        checkIfUserIsConnected();
         binding = ActivitySigninBinding.inflate(getLayoutInflater());
         preferenceManager = new PreferenceManager(getApplicationContext());
-        checkIfUserIsConnected();
+
         Auth = FirebaseAuth.getInstance();
         setContentView(binding.getRoot());
 

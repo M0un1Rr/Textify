@@ -86,6 +86,7 @@ public class SignupActivity extends AppCompatActivity {
                             user.put(Constants.KEY_NAME,binding.inputName.getText().toString().toLowerCase());
                             user.put(Constants.KEY_EMAIL,binding.inputEmail.getText().toString().toLowerCase());
                             user.put(Constants.KEY_IMAGE,encodedImage);
+                            user.put(Constants.KEY_APROPOS,"Bonjour à tous! Je suis nouveau sur Textify");
                             db.collection(Constants.KEY_COLLECTION_USERS)
                                     .document(FBuser.getUid())
                                     .set(user)
