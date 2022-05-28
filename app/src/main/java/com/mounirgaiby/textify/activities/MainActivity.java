@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ConvoListener {
+public class MainActivity extends StructureActivity implements ConvoListener {
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager;
     private FirebaseAuth auth;
@@ -55,9 +56,18 @@ public class MainActivity extends AppCompatActivity implements ConvoListener {
         fillInfo();
         init();
         getToken();
-        setListeners();
-        settingsCheck();
         listenRecentConvos();
+        setListeners();
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        fillInfo();
+        recentConvos.clear();
+        listenRecentConvos();
+
     }
 
     private void setListeners() {
@@ -79,30 +89,6 @@ public class MainActivity extends AppCompatActivity implements ConvoListener {
         binding.usersRecyclerView.setAdapter(recentConversationsAdapter);
         DB = FirebaseFirestore.getInstance();
     }
-
-    private void fillInfo() {
-        byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        binding.imageProfile.setImageBitmap(bitmap);
-    }
-
-    public void getToken() {
-        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
-    }
-
-    public void updateToken(String token) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection(Constants.KEY_COLLECTION_USERS)
-                .document(user.getUid())
-                .update(Constants.KEY_FCM_TOKEN, token)
-                .addOnSuccessListener(unused -> {
-                })
-                .addOnFailureListener(e -> {
-                    showToast("Echec de la mis a jour de Token");
-                });
-
-    }
     private void listenRecentConvos(){
         DB.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
                 .whereEqualTo(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.User_UID))
@@ -112,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements ConvoListener {
                 .addSnapshotListener(eventListener);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
         if(error != null){
             return;
@@ -172,9 +157,29 @@ public class MainActivity extends AppCompatActivity implements ConvoListener {
 
 
 
-    public void settingsCheck() {
+
+    private void fillInfo() {
+        byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        binding.imageProfile.setImageBitmap(bitmap);
+    }
+
+    public void getToken() {
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
+    }
+
+    public void updateToken(String token) {
+        preferenceManager.putString(Constants.KEY_FCM_TOKEN,token);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        db.insertDataSettings(user.getUid(), 1);
+        db.collection(Constants.KEY_COLLECTION_USERS)
+                .document(user.getUid())
+                .update(Constants.KEY_FCM_TOKEN, token)
+                .addOnSuccessListener(unused -> {
+                })
+                .addOnFailureListener(e -> {
+                    showToast("Echec de la mis a jour de Token");
+                });
 
     }
 

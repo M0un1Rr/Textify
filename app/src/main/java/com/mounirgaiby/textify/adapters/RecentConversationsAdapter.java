@@ -15,6 +15,9 @@ import com.mounirgaiby.textify.listeners.UserListener;
 import com.mounirgaiby.textify.models.ChatMessage;
 import com.mounirgaiby.textify.models.user;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class RecentConversationsAdapter extends  RecyclerView.Adapter<RecentConversationsAdapter.ConversationViewHolder> {
@@ -60,17 +63,20 @@ public class RecentConversationsAdapter extends  RecyclerView.Adapter<RecentConv
             binding.imageProfile.setImageBitmap(getCoversationImage(chatMessage.conversationImage));
             binding.textName.setText(chatMessage.conversationName);
             binding.textRecentMessage.setText(chatMessage.message);
+            binding.txtTime.setText(formatDate(chatMessage.dateObject));
             binding.getRoot().setOnClickListener(v -> {
                 user user = new user();
                 user.id = chatMessage.conversationId;
-                user.email =
                 user.name= chatMessage.conversationName;
                 user.image = chatMessage.conversationImage;
                 convoListener.onConvoClicked(user);
             } );
         }
     }
-
+    private String formatDate(Date date){
+        DateFormat format = new SimpleDateFormat("hh:mm a");
+        return format.format(date);
+    }
     private Bitmap getCoversationImage(String encodedImage){
         byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes,0,bytes.length);

@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Base64;
 import android.widget.Toast;
@@ -45,14 +48,20 @@ private FirebaseFirestore db;
                 .get()
                  .addOnSuccessListener(task -> {
                  binding.txtEmail.setText(task.getDocuments().get(0).getString(Constants.KEY_EMAIL));
+                 binding.txtNomComplet.setText(task.getDocuments().get(0).getString(Constants.KEY_NOMCOMPLET));
+                 binding.txtApropos.setText(task.getDocuments().get(0).getString(Constants.KEY_APROPOS));
+
                  });
         byte[] bytes = Base64.decode(hashMap.get("image"),Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
         binding.imageProfile.setImageBitmap(bitmap);
-        binding.txtName.setText(hashMap.get("nom"));
+        binding.txtNomU.setText(hashMap.get("nom"));
 
 
     }
+
+
+
     private void showToast(String m){
         Toast.makeText(getApplicationContext(),m,Toast.LENGTH_SHORT).show();
 

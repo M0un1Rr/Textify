@@ -35,7 +35,6 @@ private PreferenceManager preferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         checkIfUserIsConnected();
         binding = ActivitySigninBinding.inflate(getLayoutInflater());
         preferenceManager = new PreferenceManager(getApplicationContext());
@@ -48,7 +47,7 @@ private PreferenceManager preferenceManager;
     private void setListeners(){
         binding.textCreateNewAccount.setOnClickListener(v ->
               startActivity(new Intent(getApplicationContext(), SignupActivity.class)));
-
+        binding.textresetpass.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),ForgatPasswordActivity.class)));
         binding.buttonSignin.setOnClickListener(v -> {
             if(isValidSignInDetails()){
                 SignIn();
@@ -79,6 +78,8 @@ private PreferenceManager preferenceManager;
                                     preferenceManager.putString(Constants.KEY_NAME,ds.getString(Constants.KEY_NAME));
                                     preferenceManager.putString(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
                                     preferenceManager.putString(Constants.KEY_IMAGE,ds.getString(Constants.KEY_IMAGE));
+                                    preferenceManager.putString(Constants.KEY_APROPOS,ds.getString(Constants.KEY_APROPOS));
+                                    preferenceManager.putString(Constants.KEY_NOMCOMPLET,ds.getString(Constants.KEY_NOMCOMPLET));
                                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);

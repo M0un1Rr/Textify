@@ -30,6 +30,9 @@
     <string name="write_message">Ecrire une message</string>
     <string name="a_propos">A propos</string>
     <string name="deconnecter">Deconnecter</string>
+    <string name="name">Username</string>
+    <string name="val_nom">Entrez votre nom d\'utilisateur</string>
+    <string name="val_online">En ligne</string>
     <string-array name="status">
         <item>En ligne</item>
         <item>Hors ligne</item>

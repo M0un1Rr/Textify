@@ -62,16 +62,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/_4sdp"
             android:padding="@dimen/_10sdp">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imageProfile"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:padding="@dimen/_1sdp"
                 android:background="@drawable/background_image"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
+                android:clickable="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:riv_oval="true" />
 
@@ -95,7 +98,8 @@
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toTopOf="@+id/viewSupporter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageProfile" />
+                app:layout_constraintStart_toEndOf="@id/imageProfile"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtEmail"
@@ -107,6 +111,7 @@
                 android:maxLines="1"
                 android:textColor="@color/secondary_text"
                 android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageProfile"
                 app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
@@ -124,11 +129,10 @@
         app:layout_constraintBottom_toTopOf="@+id/footer"
         android:orientation="vertical"
         >
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/a_propos"
+            android:text="Nom d'utilisateur"
             android:textSize="@dimen/_13ssp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
@@ -138,8 +142,87 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:padding="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:paddingLeft="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtNomU"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:singleLine="false"
+                android:text="Vide"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editbtnNomU"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/editbtnNomU"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom complet"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/background_border"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_8sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtNomComplet"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:singleLine="false"
+                android:text="Vide"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editbtnNom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/editbtnNom"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/a_propos"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginTop="@dimen/_5sdp"
+
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/background_border"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_8sdp"
             android:orientation="horizontal">
 
             <TextView
@@ -150,48 +233,50 @@
                 android:text="Vide"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/editbtn"
+                app:layout_constraintEnd_toStartOf="@+id/editbtnPropos"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/editbtn"
+                android:id="@+id/editbtnPropos"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="status de connection"
-                android:textSize="@dimen/_13ssp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/textConStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="placeholder"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/secondary_text"
-                android:layout_marginStart="@dimen/_5sdp"/>
-        </LinearLayout>
-        <Spinner
-
-            android:id="@+id/spinnerVisibility"
+            android:text="Changer Mot de Pass"
+            android:textSize="@dimen/_13ssp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
 
-            />
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnChangePass"
+            android:layout_width="match_parent"
+            android:background="@drawable/background_border"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_8sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:singleLine="false"
+                android:text="Changer Mot de Pass"
+                android:textAlignment="center"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     </LinearLayout>
@@ -216,7 +301,7 @@
 
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/layoutApropos"
+        android:id="@+id/layoutEdit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -228,34 +313,101 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_height="wrap_content"
             android:background="@drawable/background_div"
+            android:clickable="true"
             android:padding="@dimen/_10sdp"
             android:orientation="vertical"
             >
             <TextView
+                android:id="@+id/txtEditType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="A propos"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 />
             <EditText
-                android:id="@+id/txtEditPropos"
+                android:id="@+id/txtEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_13ssp"
-                android:singleLine="false"
                 android:layout_marginTop="@dimen/_5sdp"/>
             <Button
                 android:id="@+id/btnValider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:clickable="true"
                 android:padding="0dp"
                 android:text="valider"
                 />
         </LinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@drawable/backgroundapropos"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_div"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/primary"
+                android:padding="@dimen/_5sdp"
+                android:orientation="vertical"
+                >
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/imageEdit"
+                        android:scaleType="centerCrop"
+                        />
+
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnImageEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Changer"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/primary"
+                    android:padding="0dp"
+                    android:layout_marginTop="@dimen/_1sdp"/>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnValiderImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:clickable="true"
+                android:padding="@dimen/_3sdp"
+                android:text="valider"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
 
 
 

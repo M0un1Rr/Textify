@@ -63,66 +63,135 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:padding="@dimen/_10sdp">
 
+
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imageProfile"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:background="@drawable/background_image"
                 android:scaleType="centerCrop"
+                android:padding="@dimen/_1sdp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:riv_oval="true" />
-
-            <View
-                android:id="@+id/viewSupporter"
-                android:layout_width="@dimen/_1sdp"
-                android:layout_height="@dimen/_1sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageProfile"
-                app:layout_constraintStart_toEndOf="@+id/imageProfile"
-                app:layout_constraintTop_toTopOf="@+id/imageProfile" />
-
-            <TextView
-                android:id="@+id/txtName"
+            <LinearLayout
+                android:id="@+id/emailLayout"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toTopOf="@+id/viewSupporter"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/imageProfile"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageProfile" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtEmail"
+
+                <TextView
+                    android:id="@+id/txtEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/_12ssp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/nomUlayout"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/secondary_text"
-                android:textSize="@dimen/_10ssp"
+                app:layout_constraintTop_toBottomOf="@+id/emailLayout"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageProfile"
-                app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtapropos"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:text="Nom d'utilisateur:"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/_12ssp"/>
+                <TextView
+                    android:id="@+id/txtNomU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/_12ssp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/nomClayout"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:singleLine="false"
-                android:textColor="@color/secondary_text"
-                android:textSize="@dimen/_10ssp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nomUlayout"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtEmail"
-                app:layout_constraintStart_toEndOf="@+id/imageProfile" />
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:text="Nom Complet:"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/_12ssp"/>
+
+                <TextView
+                    android:id="@+id/txtNomComplet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:textColor="@color/secondary_text"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_12ssp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/aProposlayout"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/nomClayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:text="A propos:"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/_12ssp"/>
+
+
+                <TextView
+                    android:id="@+id/txtApropos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textStyle="bold"
+                    android:singleLine="false"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/_12ssp"/>
+            </LinearLayout>
+
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

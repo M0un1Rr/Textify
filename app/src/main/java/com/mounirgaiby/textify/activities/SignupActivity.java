@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -83,9 +86,11 @@ public class SignupActivity extends AppCompatActivity {
                             FirebaseUser FBuser = FirebaseAuth.getInstance().getCurrentUser() ;
                             HashMap<String,Object> user = new HashMap<>();
                             user.put(Constants.User_UID,FBuser.getUid());
-                            user.put(Constants.KEY_NAME,binding.inputName.getText().toString().toLowerCase());
+                            user.put(Constants.KEY_NAME,binding.inputName.getText().toString());
                             user.put(Constants.KEY_EMAIL,binding.inputEmail.getText().toString().toLowerCase());
                             user.put(Constants.KEY_IMAGE,encodedImage);
+                            user.put(Constants.KEY_NOMCOMPLET,binding.inputNomComplet.getText().toString());
+                            user.put(Constants.KEY_PASSWORD,binding.inputPass.getText().toString());
                             user.put(Constants.KEY_APROPOS,"Bonjour à tous! Je suis nouveau sur Textify");
                             db.collection(Constants.KEY_COLLECTION_USERS)
                                     .document(FBuser.getUid())
@@ -93,11 +98,12 @@ public class SignupActivity extends AppCompatActivity {
 
                                     .addOnSuccessListener(documentReference -> {
                                         loading(false);
-
                                         preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
                                         preferenceManager.putString(Constants.User_UID,FBuser.getUid());
-                                        preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString().toUpperCase());
+                                        preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
                                         preferenceManager.putString(Constants.KEY_EMAIL,binding.inputEmail.getText().toString().toLowerCase());
+                                        preferenceManager.putString(Constants.KEY_APROPOS,"Bonjour à tous! Je suis nouveau sur Textify");
+                                        preferenceManager.putString(Constants.KEY_NOMCOMPLET,binding.inputNomComplet.getText().toString());
                                         preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);
                                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -106,6 +112,7 @@ public class SignupActivity extends AppCompatActivity {
 
                                     })
                                     .addOnFailureListener(exception -> {
+                                        mAuth.getCurrentUser().delete();
                                         loading(false);
                                         showToast(exception.getMessage());
 
@@ -123,12 +130,35 @@ public class SignupActivity extends AppCompatActivity {
     private String encodeImage(Bitmap bitmap){
         int previewWidth = 150;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
-        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap,previewWidth,previewHeight,false);
+        Bitmap previewBitmap = BITMAP_RESIZER(bitmap,previewWidth,previewHeight);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        previewBitmap.compress(Bitmap.CompressFormat.JPEG,50,baos);
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
         byte[] bytes = baos.toByteArray();
         return Base64.encodeToString(bytes,Base64.DEFAULT);
     }
+
+
+    public Bitmap BITMAP_RESIZER(Bitmap bitmap,int newWidth,int newHeight) {
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float ratioX = newWidth / (float) bitmap.getWidth();
+        float ratioY = newHeight / (float) bitmap.getHeight();
+        float middleX = newWidth / 2.0f;
+        float middleY = newHeight / 2.0f;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2, middleY - bitmap.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+        return scaledBitmap;
+
+    }
+
+
+
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -156,8 +186,12 @@ public class SignupActivity extends AppCompatActivity {
             showToast(getString(R.string.val_image));
             return false;
         } else if (binding.inputName.getText().toString().trim().isEmpty()) {
-            showToast(getString(R.string.val_name_empty));
+            showToast(getString(R.string.val_nom));
             binding.inputName.requestFocus();
+            return false;
+        }else if(binding.inputNomComplet.getText().toString().trim().isEmpty()){
+            showToast("Entrez votre nom complet");
+            binding.inputNomComplet.requestFocus();
             return false;
         } else if (binding.inputEmail.getText().toString().trim().isEmpty()) {
             showToast(getString(R.string.val_email_empty));

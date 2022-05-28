@@ -32,9 +32,16 @@ import com.mounirgaiby.textify.adapters.ChatAdapter;
 import com.mounirgaiby.textify.databinding.ActivityChatBinding;
 import com.mounirgaiby.textify.models.ChatMessage;
 import com.mounirgaiby.textify.models.user;
+import com.mounirgaiby.textify.network.ApiClient;
+import com.mounirgaiby.textify.network.ApiService;
 import com.mounirgaiby.textify.utilities.Constants;
 import com.mounirgaiby.textify.utilities.PreferenceManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,8 +50,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
-public class ChatActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ChatActivity extends StructureActivity {
 
     private ActivityChatBinding binding;
     private user receiverUser;
@@ -54,6 +66,8 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseUser user;
     private String ConvoId;
+    private String chatId = null;
+    private Boolean isReceiverAvailable = false;
 
 
     @Override
@@ -110,10 +124,62 @@ public class ChatActivity extends AppCompatActivity {
             conversion.put(Constants.KEY_TIMESTAMP,new Date());
             addConversion(conversion);
         }}
+        if(!isReceiverAvailable){
+            try{
+                JSONArray tokens = new JSONArray();
+                tokens.put(receiverUser.token);
+                JSONObject data = new JSONObject();
+                data.put(Constants.User_UID,preferenceManager.getString(Constants.User_UID));
+                data.put(Constants.KEY_NAME,preferenceManager.getString(Constants.KEY_NAME));
+                data.put(Constants.KEY_FCM_TOKEN,preferenceManager.getString(Constants.KEY_FCM_TOKEN));
+                data.put(Constants.KEY_LAST_MESSAGE,binding.chatMessage.getText().toString());
+
+                 JSONObject body = new JSONObject();
+                 body.put(Constants.REMOTE_MSG_DATA,data);
+                 sendNotification(body.toString());
+            }catch (Exception ex){
+                showToast(ex.getMessage());
+            }
+        }
         binding.chatMessage.setText(null);
+    }
 
 
 
+    private void listenAvailability(){
+        db.collection(Constants.KEY_COLLECTION_USERS)
+                .document(receiverUser.id)
+                .addSnapshotListener(ChatActivity.this,(value,error) -> {
+                   if(error != null){
+                       return;
+                   }
+                   if(value.getLong(Constants.KEY_DISPONIBLE) != null){
+                       int availability = Objects.requireNonNull(
+                               value.getLong(Constants.KEY_DISPONIBLE)
+                       ).intValue();
+                       isReceiverAvailable = availability == 1;
+                   }
+                    receiverUser.token = value.getString(Constants.KEY_FCM_TOKEN);
+
+                    if(isReceiverAvailable){
+                       binding.txtAvailable.setVisibility(View.VISIBLE);
+                       binding.txtAvailable.setText(R.string.val_online);
+                   }else{
+                       if(value.getDate(Constants.KEY_LAST_SEEN) != null){
+                           binding.txtAvailable.setVisibility(View.VISIBLE);
+                           binding.txtAvailable.setText(formatDate(value.getDate(Constants.KEY_LAST_SEEN)));
+                       }else{
+                           binding.txtAvailable.setVisibility(View.GONE);
+                       }
+                   }
+                });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listenAvailability();
     }
 
     private void listenMessages(){
@@ -167,11 +233,47 @@ public class ChatActivity extends AppCompatActivity {
 
     };
 
+    public void sendNotification(String messageBody){
+        ApiClient.getClient().create(ApiService.class).sendMessage(
+                Constants.getRemoteMsgHeaders(),
+                messageBody
+        ).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call,@NonNull Response<String> response) {
+             if(response.isSuccessful()){
+                 try{
+                     if(response.body() != null){
+                         JSONObject responseJSON = new JSONObject(response.body());
+                         JSONArray results = responseJSON.getJSONArray("results");
+                         if(responseJSON.getInt("failure")==1){
+                             JSONObject error = (JSONObject) results.get(0);
+                             showToast(error.getString("error"));
+                             return;
+                         }
+                     }
+
+                 }catch (JSONException e){
+                     e.printStackTrace();
+                 }
+                 showToast("Notification Sent");
+
+             }else{
+                 showToast("Erreur: "+ response.code());
+             }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call,@NonNull Throwable t) {
+                showToast(t.getMessage());
+
+            }
+        });
+    }
+
     private void loadReceiverDetails(){
         receiverUser = (user) getIntent().getSerializableExtra(Constants.KEY_USER);
         binding.friendName.setText(receiverUser.name);
         binding.imageProfile.setImageBitmap(getUserImage(receiverUser.image));
-
     }
 
     @Override
@@ -238,6 +340,15 @@ public class ChatActivity extends AppCompatActivity {
 
 
     }
+    private String formatDate(Date date){
+        DateFormat format = new SimpleDateFormat("hh:mm a");
+        return format.format(date);
+    }
+
+    private void showToast(String message){
+        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
 
     private void checkForConversionRemotly(String senderId,String receiverId){
         db.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
